@@ -7,7 +7,10 @@ const saveBtn = document.querySelector(".save-btn");
 
 // Variables
 const savedQuotes = localStorage.getItem("savedQuotes");
-let quoteArr = savedQuotes ? JSON.parse(savedQuotes) : [];
+let quoteArr = JSON.parse(savedQuotes || []) || [];
+
+// Ensure shortid is globally available (if loaded via CDN)
+const shortid = window.shortid;
 
 // start
 function init() {
@@ -45,7 +48,6 @@ function generateQuote(quote, quoteID) {
   const quoteCard = document.createElement("div");
   quoteCard.setAttribute("class", "quote-card");
   quoteCard.innerHTML = `
-          <div class="quote-id" >${quoteID}</div>
           <div class="quote-text">
           ${quote}
           </div>
